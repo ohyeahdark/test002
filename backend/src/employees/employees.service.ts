@@ -1,0 +1,53 @@
+/* ============================================================
+File: src/employees/employees.service.ts
+Mô tả: Chứa toàn bộ logic xử lý nghiệp vụ, tương tác với DB.
+============================================================
+*/
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
+
+@Injectable()
+export class EmployeesService {
+  // Tiêm PrismaService vào để sử dụng
+  constructor(private prisma: PrismaService) {}
+
+  // Tạo nhân viên mới
+  create(createEmployeeDto: CreateEmployeeDto) {
+    return this.prisma.employee.create({
+      data: createEmployeeDto,
+    });
+  }
+
+  // Lấy danh sách tất cả nhân viên
+  findAll() {
+    return this.prisma.employee.findMany();
+  }
+
+  // Tìm một nhân viên theo ID
+  async findOne(id: string) {
+    const employee = await this.prisma.employee.findUnique({
+      where: { id },
+    });
+    if (!employee) {
+      throw new NotFoundException(`Không tìm thấy nhân viên với ID: ${id}`);
+    }
+    return employee;
+  }
+
+  // Cập nhật thông tin nhân viên
+  update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
+    return this.prisma.employee.update({
+      where: { id },
+      data: updateEmployeeDto,
+    });
+  }
+
+  // Xóa một nhân viên
+  remove(id: string) {
+    return this.prisma.employee.delete({
+      where: { id },
+    });
+  }
+}
