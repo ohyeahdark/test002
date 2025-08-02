@@ -17,7 +17,9 @@ import FormElements from "./pages/Forms/FormElements";
 import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
-import Home from "./pages/Dashboard/Home";
+import Employee from "./pages/Dashboard/Employee";
+import Department from "./pages/Dashboard/Department";
+import Position from "./pages/Dashboard/Position";
 
 export default function App() {
   return (
@@ -27,7 +29,9 @@ export default function App() {
         <Routes>
           {/* Dashboard Layout */}
           <Route element={<AppLayout />}>
-            <Route index path="/" element={<Home />} />
+            <Route index path="/" element={<Department />} />
+            <Route index path="/position" element={<Position />} />
+            <Route index path="/employee" element={<Employee />} />
 
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />

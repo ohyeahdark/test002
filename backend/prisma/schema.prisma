@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,17 +7,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Định nghĩa model cho Nhân viên
-model Employee {
-  id          String   @id @default(uuid())
-  employeeCode String   @unique @map("employee_code")
-  name        String
-  email       String   @unique
-  phone       String?
-  department  String
-  position    String
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+enum EmployeeStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+}
 
-  @@map("employees")
+// Model mới cho Phòng ban
+model Department {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  employees Employee[] // Một phòng ban có nhiều nhân viên
+  positions Position[] // Một phòng ban có nhiều chức vụ
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// Model mới cho Chức vụ
+model Position {
+  id        String     @id @default(uuid())
+  name      String
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  employees Employee[] // Một chức vụ có nhiều nhân viên
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// Model Employee được cập nhật với các mối quan hệ
+model Employee {
+  id           String         @id @default(uuid())
+  employeeCode String         @unique
+  name         String
+  email        String         @unique
+  phone        String?
+  avatarUrl    String?
+  
+  // Mối quan hệ với Position
+  position     Position @relation(fields: [positionId], references: [id])
+  positionId   String
+
+  // Mối quan hệ với Department
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  
+  bio          String?
+  
+  addressLine1 String?
+  addressCity  String?
+  addressCountry String?
+
+  status       EmployeeStatus @default(ACTIVE)
+  dateOfBirth  DateTime?
+  hireDate     DateTime       @default(now())
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }

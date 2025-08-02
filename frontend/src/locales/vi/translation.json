@@ -1,0 +1,56 @@
+{
+  "sidebar": {
+    "menu": "Thực đơn",
+    "others": "Khác",
+    "management": "Quản lý",
+    "department": "Phòng ban",
+    "employee": "Nhân viên",
+    "position": "Chức vụ",
+    "calendar": "Lịch",
+    "user_profile": "Hồ sơ Người dùng",
+    "forms": "Biểu mẫu",
+    "form_elements": "Thành phần Biểu mẫu",
+    "tables": "Bảng",
+    "basic_tables": "Bảng Cơ bản",
+    "pages": "Trang",
+    "blank_page": "Trang trống",
+    "error_404": "Lỗi 404",
+    "charts": "Biểu đồ",
+    "line_chart": "Biểu đồ Đường",
+    "bar_chart": "Biểu đồ Cột",
+    "ui_elements": "Thành phần UI",
+    "alerts": "Cảnh báo",
+    "avatar": "Ảnh đại diện",
+    "badge": "Huy hiệu",
+    "buttons": "Nút bấm",
+    "images": "Hình ảnh",
+    "videos": "Video",
+    "authentication": "Xác thực",
+    "sign_in": "Đăng nhập",
+    "sign_up": "Đăng ký"
+  },
+  "employee_page": {
+    "title": "Quản lý Nhân viên",
+    "search_placeholder": "Tìm kiếm theo tên, email...",
+    "add_button": "Thêm mới",
+    "table": {
+      "name": "Tên Nhân viên",
+      "department": "Phòng ban",
+      "position": "Chức vụ",
+      "actions": "Hành động"
+    }
+  },
+  "employee_modal": {
+    "add_title": "Thêm Nhân viên mới",
+    "edit_title": "Chỉnh sửa Hồ sơ Nhân viên",
+    "name": "Họ và Tên",
+    "employee_code": "Mã Nhân viên",
+    "email": "Email",
+    "department": "Phòng ban",
+    "position": "Chức vụ",
+    "select_department": "-- Chọn phòng ban --",
+    "select_position": "-- Chọn chức vụ --",
+    "cancel": "Hủy",
+    "save": "Lưu"
+  }
+}

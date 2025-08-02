@@ -15,14 +15,27 @@ export class EmployeesService {
 
   // Tạo nhân viên mới
   create(createEmployeeDto: CreateEmployeeDto) {
+    // Tách departmentId và positionId ra khỏi DTO
+    const { departmentId, positionId, ...restOfDto } = createEmployeeDto;
+
     return this.prisma.employee.create({
-      data: createEmployeeDto,
+      data: {
+        ...restOfDto, // Dữ liệu còn lại của nhân viên
+        department: { connect: { id: departmentId } }, // Kết nối với phòng ban
+        position: { connect: { id: positionId } },     // Kết nối với chức vụ
+      },
     });
   }
 
   // Lấy danh sách tất cả nhân viên
   findAll() {
-    return this.prisma.employee.findMany();
+    return this.prisma.employee.findMany({
+      include: {
+        department: true,
+        position: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   // Tìm một nhân viên theo ID
