@@ -16,8 +16,8 @@ const LanguageSwitcher = () => {
         <div className="relative">
             <select 
                 onChange={(e) => changeLanguage(e.target.value)} 
-                value={i18n.language.split('-')[0]}
-                className="bg-transparent text-black dark:text-white font-semibold py-2 px-3 rounded-md appearance-none"
+                value={i18n.language}
+                className="bg-transparent text-black dark:text-white font-semibold py-2 px-3 rounded-md"
             >
                 <option value="vi">🇻🇳 Tiếng Việt</option>
                 <option value="en">🇬🇧 English</option>

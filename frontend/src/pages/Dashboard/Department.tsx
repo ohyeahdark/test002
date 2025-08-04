@@ -2,7 +2,7 @@
 import PageMeta from "../../components/common/PageMeta";
 import DepartmentsPage from "../departments/DepartmentsPage";
 
-export default function Employee() {
+export default function Department() {
   return (
     <>
       <PageMeta

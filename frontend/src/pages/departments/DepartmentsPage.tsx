@@ -14,8 +14,17 @@ const DepartmentsPage = () => {
         setIsLoading(true);
         try {
             const response = await api.get('/departments');
-            setDepartments(response.data);
-        } catch (err) { console.error(err); } 
+            // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu response.data là một mảng
+            if (Array.isArray(response.data)) {
+                setDepartments(response.data);
+            } else {
+                console.error("API /departments không trả về một mảng:", response.data);
+                setDepartments([]); // Đặt lại thành mảng rỗng để tránh lỗi
+            }
+        } catch (err) { 
+            console.error("Lỗi khi tải danh sách phòng ban:", err);
+            setDepartments([]); // Đặt lại thành mảng rỗng khi có lỗi
+        } 
         finally { setIsLoading(false); }
     }, []);
 

@@ -18,9 +18,28 @@ const PositionsPage = () => {
                 api.get('/positions'),
                 api.get('/departments')
             ]);
-            setPositions(positionsRes.data);
-            setDepartments(departmentsRes.data);
-        } catch (err) { console.error(err); } 
+
+            // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu departmentsRes.data là một mảng
+            if (Array.isArray(departmentsRes.data)) {
+                setDepartments(departmentsRes.data);
+            } else {
+                console.error("API /departments không trả về một mảng:", departmentsRes.data);
+                setDepartments([]); // Đặt lại thành mảng rỗng để tránh lỗi
+            }
+
+            // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu positionsRes.data là một mảng
+            if (Array.isArray(positionsRes.data)) {
+                setPositions(positionsRes.data);
+            } else {
+                console.error("API /positions không trả về một mảng:", positionsRes.data);
+                setPositions([]); // Đặt lại thành mảng rỗng để tránh lỗi
+            }
+        } catch (err) {
+            console.error("Lỗi khi tải danh sách phòng ban:", err);
+            setDepartments([]); // Đặt lại thành mảng rỗng để tránh lỗi
+            console.error("Lỗi khi tải danh sách chức vụ:", err);
+            setPositions([]); // Đặt lại thành mảng rỗng để tránh lỗi
+        }
         finally { setIsLoading(false); }
     }, []);
 

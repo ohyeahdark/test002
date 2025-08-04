@@ -19,7 +19,13 @@ import {
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
 
-const { t } = useTranslation();
+
+
+const AppSidebar: React.FC = () => {
+  const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
+  const location = useLocation();
+
+  const { t } = useTranslation();
 
 type NavItem = {
   name: string;
@@ -34,8 +40,8 @@ const navItems: NavItem[] = [
     name: t('sidebar.management'),
     subItems: [
       { name: t('sidebar.department'), path: "/", pro: false },
-      { name: t('sidebar.position'), path: "/positions", pro: false },
-      { name: t('sidebar.employee'), path: "/employees", pro: false }
+      { name: t('sidebar.position'), path: "/position", pro: false },
+      { name: t('sidebar.employee'), path: "/employee", pro: false }
     ],
   },
   {
@@ -98,10 +104,6 @@ const othersItems: NavItem[] = [
     ],
   },
 ];
-
-const AppSidebar: React.FC = () => {
-  const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
-  const location = useLocation();
 
   const [openSubmenu, setOpenSubmenu] = useState<{
     type: "main" | "others";

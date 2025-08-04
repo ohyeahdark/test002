@@ -20,10 +20,38 @@ const EmployeePage = () => {
         api.get('/departments'),
         api.get('/positions'),
       ]);
-      setEmployees(employeesRes.data);
-      setDepartments(departmentsRes.data);
-      setAllPositions(positionsRes.data);
-    } catch (err) { console.error("Failed to load data", err); }
+
+      // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu departmentsRes.data là một mảng
+      if (Array.isArray(departmentsRes.data)) {
+        setDepartments(departmentsRes.data);
+      } else {
+        console.error("API /departments không trả về một mảng:", departmentsRes.data);
+        setDepartments([]); // Đặt lại thành mảng rỗng để tránh lỗi
+      }
+
+      // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu positionsRes.data là một mảng
+      if (Array.isArray(positionsRes.data)) {
+        setAllPositions(positionsRes.data);
+      } else {
+        console.error("API /positions không trả về một mảng:", positionsRes.data);
+        setAllPositions([]); // Đặt lại thành mảng rỗng để tránh lỗi
+      }
+
+      // KIỂM TRA AN TOÀN: Chỉ cập nhật state nếu employeesRes.data là một mảng
+      if (Array.isArray(employeesRes.data)) {
+        setAllPositions(employeesRes.data);
+      } else {
+        console.error("API /employees không trả về một mảng:", employeesRes.data);
+        setEmployees([]); // Đặt lại thành mảng rỗng để tránh lỗi
+      }
+    } catch (err) {
+      console.error("Lỗi khi tải danh sách phòng ban:", err);
+      setDepartments([]); // Đặt lại thành mảng rỗng để tránh lỗi
+      console.error("Lỗi khi tải danh sách chức vụ:", err);
+      setAllPositions([]); // Đặt lại thành mảng rỗng để tránh lỗi
+      console.error("Lỗi khi tải danh sách nhân viên:", err);
+      setEmployees([]); // Đặt lại thành mảng rỗng để tránh lỗi
+    }
     finally { setIsLoading(false); }
   }, []);
 
