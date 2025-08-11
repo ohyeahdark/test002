@@ -11,7 +11,7 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 @Injectable()
 export class EmployeesService {
   // Tiêm PrismaService vào để sử dụng
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   // Tạo nhân viên mới
   create(createEmployeeDto: CreateEmployeeDto) {
@@ -21,6 +21,12 @@ export class EmployeesService {
     return this.prisma.employee.create({
       data: {
         ...restOfDto, // Dữ liệu còn lại của nhân viên
+        dateOfBirth: createEmployeeDto.dateOfBirth
+          ? new Date(createEmployeeDto.dateOfBirth)
+          : undefined,
+        hireDate: createEmployeeDto.hireDate
+          ? new Date(createEmployeeDto.hireDate)
+          : undefined,
         department: { connect: { id: departmentId } }, // Kết nối với phòng ban
         position: { connect: { id: positionId } },     // Kết nối với chức vụ
       },
@@ -34,7 +40,7 @@ export class EmployeesService {
         department: true,
         position: true,
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { name: 'asc' },
     });
   }
 
@@ -51,9 +57,21 @@ export class EmployeesService {
 
   // Cập nhật thông tin nhân viên
   update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
+    // Tách departmentId và positionId ra khỏi DTO
+    const { departmentId, positionId, ...restOfDto } = updateEmployeeDto;
     return this.prisma.employee.update({
       where: { id },
-      data: updateEmployeeDto,
+      data: {
+        ...restOfDto, // Dữ liệu còn lại của nhân viên
+        dateOfBirth: updateEmployeeDto.dateOfBirth
+          ? new Date(updateEmployeeDto.dateOfBirth)
+          : undefined,
+        hireDate: updateEmployeeDto.hireDate
+          ? new Date(updateEmployeeDto.hireDate)
+          : undefined,
+        department: { connect: { id: departmentId } }, // Kết nối với phòng ban
+        position: { connect: { id: positionId } },     // Kết nối với chức vụ
+      },
     });
   }
 

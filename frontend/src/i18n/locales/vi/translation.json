@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "department": "Phòng ban",
+    "position": "Chức vụ",
+    "employee": "Nhân viên",
+    "menu": "Menu",
+    "title": "Quản lý nhân sự"
+  },
+  "common": {
+    "add": "Thêm mới",
+    "edit": "Chỉnh sửa",
+    "delete": "Xoá",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "inSave": "Đang lưu...",
+    "or": "Hoặc",
+    "notAuthorized": "Không có quyền truy cập",
+    "notAuthorizedMessage": "Bạn không được phép truy cập vào trang này."
+  },
+  "login-logout": {
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "keepLogin": "Ghi nhớ đăng nhập",
+    "forgetPassword": "Quên mật khẩu?",
+    "logIn": "Đăng nhập",
+    "logOut": "Đăng xuất",
+    "register": "Đăng ký",
+    "registerWith": "Đăng ký với",
+    "registerMessage": "Nhập tên đăng nhập và mật khẩu để tạo tài khoản.",
+    "noAccount": "Không có tài khoản?",
+    "usernamePlaceholder": "Nhập tên đăng nhập của bạn",
+    "passwordPlaceholder": "Nhập mật khẩu của bạn",
+    "logInMessage": "Nhập tên đăng nhập và mật khẩu của bạn để đăng nhập!",
+    "backToLogin": "Quay lại đăng nhập!",
+    "haveAccount": "Đã có tài khoản",
+    "registerFail": "Đăng ký không thành công"
+  },
+  "table": {
+    "searchPlaceholder": "Tìm kiếm...",
+    "loading": "Đang tải dữ liệu...",
+    "noData": "Không có dữ liệu",
+    "prev": "←",
+    "next": "→",
+    "page": "Trang"
+  },
+  "department": {
+    "title": "Quản lý phòng ban",
+    "addTitle": "Thêm phòng ban",
+    "editTitle": "Chỉnh sửa phòng ban",
+    "fetchError": "Không thể tải danh sách phòng ban.",
+    "saveFailed": "Đã xảy ra lỗi khi lưu phòng ban. Vui lòng thử lại.",
+    "deleteFailed": "Xoá phòng ban thất bại.",
+    "confirmDelete": "Bạn có chắc chắn muốn xoá phòng ban này?",
+    "nameRequired": "Tên phòng ban không được để trống!",
+    "limitName": "Tên phòng ban không được vượt quá 100 ký tự!",
+    "fields": {
+      "name": "Tên phòng ban",
+      "index": "#",
+      "action": "Hành động"
+    }
+  },
+  "position": {
+    "title": "Quản lý chức vụ",
+    "addTitle": "Thêm chức vụ",
+    "editTitle": "Chỉnh sửa chức vụ",
+    "fetchError": "Không thể tải danh sách chức vụ.",
+    "saveFailed": "Đã xảy ra lỗi khi lưu chức vụ. Vui lòng thử lại.",
+    "deleteFailed": "Xoá chức vụ thất bại.",
+    "confirmDelete": "Bạn có chắc chắn muốn xoá chức vụ này?",
+    "nameRequired": "Tên chức vụ không được để trống!",
+    "limitName": "Tên chức vụ không được vượt quá 100 ký tự!",
+    "fields": {
+      "index": "#",
+      "name": "Tên chức vụ",
+      "status": "Trạng thái"
+    }
+  },
+  "employee": {
+    "title": "Quản lý nhân viên",
+    "addTitle": "Thêm nhân viên",
+    "editTitle": "Chỉnh sửa nhân viên",
+    "fetchError": "Không thể tải danh sách nhân viên.",
+    "saveFailed": "Không thể lưu nhân viên.",
+    "deleteFailed": "Xoá nhân viên thất bại.",
+    "confirmDelete": "Bạn có chắc muốn xoá nhân viên này?",
+    "nameRequired": "Tên nhân viên không được để trống!",
+    "limitName": "Tên nhân viên không được vượt quá 150 ký tự!",
+    "codeRequired": "Vui lòng nhập mã nhân viên",
+    "codeTooLong": "Mã nhân viên không được dài quá 20 ký tự",
+    "status": {
+      "active": "Hoạt động",
+      "inactive": "Tạm khóa",
+      "onleave": "Đã nghỉ"
+    },
+    "fields": {
+      "index": "#",
+      "avatar": "Ảnh đại điện",
+      "code": "Mã nhân viên",
+      "name": "Họ và tên",
+      "birthday": "Ngày sinh",
+      "chooseDate": "Chọn ngày",
+      "email": "Email",
+      "department": "Phòng ban",
+      "chooseDepartment": "Chọn phòng ban",
+      "position": "Chức vụ",
+      "choosePosition": "Chọn chức vụ",
+      "hireDate": "Ngày bắt đầu",
+      "status": "Trạng thái",
+      "action": "Hành động"
+    }
+  }
+}

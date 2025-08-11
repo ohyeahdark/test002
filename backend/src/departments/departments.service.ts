@@ -14,7 +14,7 @@ export class DepartmentsService {
   findAll() {
     return this.prisma.department.findMany({
       orderBy: {
-        createdAt: 'desc',
+        name: 'asc',
       },
     });
   }

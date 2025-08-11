@@ -6,10 +6,6 @@ export interface Department {
 export interface Position {
     id: string;
     name: string;
-    departmentId: string;
-    department?: { 
-        name: string;
-    }
 }
 
 export type EmployeeStatus = 'ACTIVE' | 'INACTIVE' | 'ON_LEAVE';
@@ -30,6 +26,9 @@ export interface Employee {
   phone?: string;
   avatarUrl?: string;
   bio?: string;
+  addressLine1?: string;
+  addressCity?: string;
+  addressCountry?: string;
   status: EmployeeStatus;
   dateOfBirth?: string; 
   hireDate: string;
@@ -41,4 +40,12 @@ export interface Employee {
   department: Department; // Prisma sẽ trả về object lồng nhau này
   positionId: string;
   position: Position; // Prisma sẽ trả về object lồng nhau này
+}
+
+export interface User {
+    id: string;
+    username: string;
+    password: string;
+    role: string;
+    employeeId: string;
 }

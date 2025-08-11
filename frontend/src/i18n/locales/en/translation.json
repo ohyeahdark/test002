@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "department": "Department",
+    "position": "Position",
+    "employee": "Employee",
+    "menu": "Menu",
+    "title": "HR Management"
+  },
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "inSave": "Saving...",
+    "or": "Or",
+    "notAuthorized": "No Access",
+    "notAuthorizedMessage": "You are not allowed to access this page."
+  },
+  "login-logout": {
+    "username": "Username",
+    "password": "Password",
+    "keepLogin": "Keep me logged in",
+    "forgetPassword": "Forgot password?",
+    "logIn": "Log in",
+    "logOut": "Log out",
+    "register": "Register",
+    "registerWith": "Register with",
+    "registerMessage": "Enter your username and password to create an account.",
+    "noAccount": "Don't have an account?",
+    "usernamePlaceholder": "Enter your username",
+    "passwordPlaceholder": "Enter your password",
+    "logInMessage": "Enter your username and password to log in!",
+    "backToLogin": "Back to log in!",
+    "haveAccount": "Already have an account",
+    "registerFail": "Registration failed"
+  },
+  "table": {
+    "searchPlaceholder": "Search...",
+    "loading": "Loading...",
+    "noData": "No data available",
+    "prev": "←",
+    "next": "→",
+    "page": "Page"
+  },
+  "department": {
+    "title": "Department Management",
+    "addTitle": "Add Department",
+    "editTitle": "Edit Department",
+    "fetchError": "Unable to load department list.",
+    "saveFailed": "An error occurred while saving the department. Please try again.",
+    "deleteFailed": "Delete department failed.",
+    "confirmDelete": "Are you sure you want to delete this department?",
+    "nameRequired": "Department's name cannot be blank!",
+    "limitName": "Department's name cannot exceed 100 characters!",
+    "fields": {
+      "name": "Department's Name",
+      "index": "#",
+      "action": "Action"
+    }
+  },
+  "position": {
+    "title": "Position Management",
+    "addTitle": "Add Postion",
+    "editTitle": "Edit Postion",
+    "fetchError": "Unable to load position list.",
+    "saveFailed": "Unable to save position.",
+    "deleteFailed": "Delete position failed.",
+    "confirmDelete": "Are you sure you want to delete this position?",
+    "nameRequired": "Position's name cannot be blank!",
+    "limitName": "Position's name cannot exceed 100 characters!",
+    "fields": {
+      "index": "#",
+      "name": "Position's Name",
+      "action": "Action"
+    }
+  },
+  "employee": {
+    "title": "Employee Management",
+    "addTitle": "Add Employee",
+    "editTitle": "Edit Employee",
+    "fetchError": "Unable to load employee list.",
+    "saveFailed": "Unable to save employee.",
+    "deleteFailed": "Delete employee failed.",
+    "confirmDelete": "Are you sure you want to delete this employee?",
+    "nameRequired": "Employee's name cannot be blank!",
+    "limitName": "Employee's name cannot exceed 150 characters!",
+    "codeRequired": "Employee's code cannot be blank!",
+    "codeTooLong": "Employee's code cannot exceed 20 characters!",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "onleave": "Leave"
+    },
+    "fields": {
+      "index": "#",
+      "avatar": "Avartar",
+      "code": "Employee's Code",
+      "name": "Fullname",
+      "birthday": "Birthday",
+      "chooseDate": "Choose date",
+      "email": "Email",
+      "department": "Department",
+      "chooseDepartment": "Choose Department",
+      "position": "Postion",
+      "choosePosition": "Choose Postion",
+      "hireDate": "Start date",
+      "status": "Status",
+      "action": "Action"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 
 import PageMeta from "../../components/common/PageMeta";
-import PositionsPage from "../positions/PositionsPage";
+import PositionPage from "../../features/positions/PositionPage";
 
 export default function Position() {
   return (
@@ -9,10 +9,10 @@ export default function Position() {
         title="Human Resource Managerment"
         description="Human Resource Managerment - ItAiUa"
       />
-      
-      <div className="grid grid-cols-12 gap-4 md:gap-6">
-        <div className="col-span-12 space-y-6 xl:col-span-7">
-          <PositionsPage />
+
+      <div className="grid grid-cols-1 w-full">
+        <div className="col-span-1">
+          <PositionPage />
         </div>
       </div>
     </>

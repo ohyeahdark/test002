@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode; // Button text or content
   size?: "sm" | "md"; // Button size
   variant?: "primary" | "outline"; // Button variant
@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   className = "",
   disabled = false,
+  ...rest
 }) => {
   // Size Classes
   const sizeClasses = {
@@ -42,6 +43,7 @@ const Button: React.FC<ButtonProps> = ({
       } ${variantClasses[variant]} ${
         disabled ? "cursor-not-allowed opacity-50" : ""
       }`}
+      {...rest}
       onClick={onClick}
       disabled={disabled}
     >

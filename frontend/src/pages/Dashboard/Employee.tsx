@@ -1,6 +1,6 @@
 
 import PageMeta from "../../components/common/PageMeta";
-import EmployeePage from "../employees/EmployeePage";
+import EmployeePage from "../../features/employees/EmployeePage";
 
 export default function Employee() {
   return (
@@ -9,9 +9,9 @@ export default function Employee() {
         title="Human Resource Managerment"
         description="Human Resource Managerment - ItAiUa"
       />
-      
-      <div className="grid grid-cols-12 gap-4 md:gap-6">
-        <div className="col-span-12 space-y-6 xl:col-span-7">
+
+      <div className="grid grid-cols-1 w-full">
+        <div className="col-span-1">
           <EmployeePage />
         </div>
       </div>

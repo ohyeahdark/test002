@@ -1,6 +1,6 @@
 
 import PageMeta from "../../components/common/PageMeta";
-import DepartmentsPage from "../departments/DepartmentsPage";
+import DepartmentPage from "../../features/departments/DepartmentPage";
 
 export default function Department() {
   return (
@@ -9,10 +9,10 @@ export default function Department() {
         title="Human Resource Managerment"
         description="Human Resource Managerment - ItAiUa"
       />
-      
-      <div className="grid grid-cols-12 gap-4 md:gap-6">
-        <div className="col-span-12 space-y-6 xl:col-span-7">
-          <DepartmentsPage />
+
+      <div className="grid grid-cols-1 w-full">
+        <div className="col-span-1">
+          <DepartmentPage />
         </div>
       </div>
     </>

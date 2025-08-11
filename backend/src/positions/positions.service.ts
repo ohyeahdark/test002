@@ -11,22 +11,14 @@ export class PositionsService {
     return this.prisma.position.create({
       data: {
         name: createPositionDto.name,
-        department: {
-          connect: { id: createPositionDto.departmentId },
-        },
       },
     });
   }
 
   findAll() {
     return this.prisma.position.findMany({
-      include: {
-        department: {
-          select: { name: true },
-        },
-      },
       orderBy: {
-        createdAt: 'desc',
+        name: 'asc',
       },
     });
   }
@@ -36,9 +28,6 @@ export class PositionsService {
       where: { id },
       data: {
         name: updatePositionDto.name,
-        department: updatePositionDto.departmentId
-          ? { connect: { id: updatePositionDto.departmentId } }
-          : undefined,
       },
     });
   }

@@ -13,12 +13,16 @@ enum EmployeeStatus {
   ON_LEAVE
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 // Model mới cho Phòng ban
 model Department {
   id        String     @id @default(uuid())
   name      String     @unique
   employees Employee[] // Một phòng ban có nhiều nhân viên
-  positions Position[] // Một phòng ban có nhiều chức vụ
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
@@ -27,8 +31,6 @@ model Department {
 model Position {
   id        String     @id @default(uuid())
   name      String
-  department Department @relation(fields: [departmentId], references: [id])
-  departmentId String
   employees Employee[] // Một chức vụ có nhiều nhân viên
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -37,11 +39,11 @@ model Position {
 // Model Employee được cập nhật với các mối quan hệ
 model Employee {
   id           String         @id @default(uuid())
-  employeeCode String         @unique
   name         String
   email        String         @unique
   phone        String?
   avatarUrl    String?
+  bio          String?
   
   // Mối quan hệ với Position
   position     Position @relation(fields: [positionId], references: [id])
@@ -50,8 +52,8 @@ model Employee {
   // Mối quan hệ với Department
   department   Department @relation(fields: [departmentId], references: [id])
   departmentId String
-  
-  bio          String?
+ 
+  user         User?
   
   addressLine1 String?
   addressCity  String?
@@ -63,4 +65,16 @@ model Employee {
 
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  password     String
+  role         String   @default("user")
+  refreshToken  String?  @db.Text
+  employee     Employee? @relation(fields: [employeeId], references: [id])
+  employeeId   String?   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
