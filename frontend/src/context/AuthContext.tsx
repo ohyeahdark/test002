@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { login as apiLogin, register as apiRegister, fetchMe, logout as apiLogout} from '../features/auth/authAPI';
+import { login as apiLogin, register as apiRegister, fetchMe, logout as apiLogout, refresh } from '../features/auth/authAPI';
+import { useNavigate } from 'react-router-dom';
 
 interface Employee {
   id: number;
@@ -32,6 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initAuth = async () => {
@@ -39,7 +41,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const data = await fetchMe();
         setUser(data);
       } catch {
-        setUser(null);
+        try {
+          await refresh();
+          const { data } = await fetchMe();
+          setUser(data);
+        } catch (refreshErr) {
+          setUser(null);
+        }
       } finally {
         setLoading(false);
       }
@@ -50,11 +58,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const handleLogin = async (username: string, password: string) => {
     setLoading(true);
     try {
-      const res = await apiLogin(username, password);
-      const newToken = res.accessToken;
-      localStorage.setItem('token', newToken);
-      setToken(newToken);
-      setUser(res.user);
+      await apiLogin(username, password);
+      const { data } = await fetchMe();
+      setUser(data);
     } finally {
       setLoading(false);
     }
@@ -73,11 +79,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-    apiLogout();
+  const logout = async () => {
+    await apiLogout();
     setUser(null);
+    navigate("/login");
   };
 
   return (

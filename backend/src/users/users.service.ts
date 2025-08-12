@@ -9,7 +9,7 @@ export const roundsOfHashing = 10;
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: CreateUserDto): Promise<User> {
     const hashedPassword = await bcrypt.hash(
@@ -53,7 +53,7 @@ export class UsersService {
     return this.update(userId, { refreshToken: undefined });
   }
 
-  async updateRefreshToken(userId: string, refreshToken: string): Promise<User> {
-    return this.update(userId, { refreshToken });
+  async updateRefreshToken(id: string, data: UpdateUserDto): Promise<User> {
+    return this.prisma.user.update({ where: { id : id }, data });
   }
 }

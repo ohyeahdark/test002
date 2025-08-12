@@ -22,11 +22,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowed.includes(origin)) return callback(null, true);
-      callback(new Error('Not allowed by CORS'), false);
-    },
+    origin: [process.env.ALLOWED_ORIGINS || 'http://localhost:5173'],
     credentials: true,
   });
 
