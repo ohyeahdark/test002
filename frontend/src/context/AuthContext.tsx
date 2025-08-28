@@ -1,12 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { login as apiLogin, register as apiRegister, fetchMe, logout as apiLogout, refresh } from '../features/auth/authAPI';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { login as apiLogin, register as apiRegister, fetchMe, logout as apiLogout } from '../features/auth/authAPI';
 
 interface Employee {
   id: number;
   name: string;
   email: string;
-  avatar?: string;
+  avatarUrl?: string;
   department?: { name: string };
   position?: { name: string };
 }
@@ -18,6 +17,7 @@ interface AuthCtx {
   register: (username: string, password: string) => Promise<void>;
   logout: () => void;
   token: string | null;
+  refreshMe: () => Promise<void>;
 }
 
 interface User {
@@ -33,38 +33,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
   const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const initAuth = async () => {
-      try {
-        const data = await fetchMe();
-        setUser(data);
-      } catch {
-        try {
-          await refresh();
-          const { data } = await fetchMe();
-          setUser(data);
-        } catch (refreshErr) {
-          setUser(null);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-    initAuth();
-  }, []);
-
-  const handleLogin = async (username: string, password: string) => {
-    setLoading(true);
+  const refreshMe = useCallback(async () => {
     try {
-      await apiLogin(username, password);
-      const { data } = await fetchMe();
-      setUser(data);
+      const me = await fetchMe(); // server đọc cookie → trả user
+      setUser(me);
+    } catch {
+      setUser(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    refreshMe(); // chạy 1 lần khi app mount
+  }, [refreshMe]);
+
+  const login = useCallback(async (username: string, password: string) => {
+    await apiLogin(username, password); // server set cookie
+    await refreshMe(); // cập nhật user
+  }, [refreshMe]);
 
   const handleRegister = async (username: string, password: string) => {
     setLoading(true);
@@ -79,14 +67,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     await apiLogout();
     setUser(null);
-    navigate("/login");
-  };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login: handleLogin, register: handleRegister, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, register: handleRegister, logout, refreshMe }}>
       {loading ? <div className="h-screen flex items-center justify-center">Loading...</div> : children}
     </AuthContext.Provider>
   );

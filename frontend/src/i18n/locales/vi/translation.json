@@ -4,8 +4,11 @@
     "department": "Phòng ban",
     "position": "Chức vụ",
     "employee": "Nhân viên",
+    "leave": "Nghỉ phép",
     "menu": "Menu",
-    "title": "Quản lý nhân sự"
+    "title": "Quản lý nhân sự",
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "support": "Hỗ trợ"
   },
   "common": {
     "add": "Thêm mới",
@@ -14,7 +17,19 @@
     "cancel": "Hủy",
     "save": "Lưu",
     "inSave": "Đang lưu...",
+    "close": "Đóng",
     "or": "Hoặc",
+    "all": "Tất cả",
+    "searchPlaceholder": "Tìm kiếm...",
+    "loading": "Đang tải dữ liệu...",
+    "noData": "Không có dữ liệu",
+    "chooseType": "-- Chọn loại --",
+    "prev": "←",
+    "next": "→",
+    "page": "Trang",
+    "pending": "Đang chờ",
+    "approved": "Chấp nhận",
+    "rejected": "Từ chối",
     "notAuthorized": "Không có quyền truy cập",
     "notAuthorizedMessage": "Bạn không được phép truy cập vào trang này."
   },
@@ -36,14 +51,6 @@
     "haveAccount": "Đã có tài khoản",
     "registerFail": "Đăng ký không thành công"
   },
-  "table": {
-    "searchPlaceholder": "Tìm kiếm...",
-    "loading": "Đang tải dữ liệu...",
-    "noData": "Không có dữ liệu",
-    "prev": "←",
-    "next": "→",
-    "page": "Trang"
-  },
   "department": {
     "title": "Quản lý phòng ban",
     "addTitle": "Thêm phòng ban",
@@ -55,8 +62,8 @@
     "nameRequired": "Tên phòng ban không được để trống!",
     "limitName": "Tên phòng ban không được vượt quá 100 ký tự!",
     "fields": {
+      "index": "STT",
       "name": "Tên phòng ban",
-      "index": "#",
       "action": "Hành động"
     }
   },
@@ -71,7 +78,7 @@
     "nameRequired": "Tên chức vụ không được để trống!",
     "limitName": "Tên chức vụ không được vượt quá 100 ký tự!",
     "fields": {
-      "index": "#",
+      "index": "STT",
       "name": "Tên chức vụ",
       "status": "Trạng thái"
     }
@@ -94,7 +101,7 @@
       "onleave": "Đã nghỉ"
     },
     "fields": {
-      "index": "#",
+      "index": "STT",
       "avatar": "Ảnh đại điện",
       "code": "Mã nhân viên",
       "name": "Họ và tên",
@@ -107,6 +114,32 @@
       "choosePosition": "Chọn chức vụ",
       "hireDate": "Ngày bắt đầu",
       "status": "Trạng thái",
+      "action": "Hành động"
+    }
+  },
+  "leave": {
+    "title": "Đơn nghỉ phép của tôi",
+    "addTitle": "Thêm nghỉ phép",
+    "editTitle": "Sửa thông tin nghỉ phép",
+    "fetchError": "Không thể tải danh sách nhân viên.",
+    "saveFailed": "Không thể lưu đơn nghỉ phép.",
+    "deleteFailed": "Xóa đơn nghỉ phép thất bại.",
+    "confirmDelete": "Bạn có chắc chắn muốn xoá đơn nghỉ phép này?",
+    "confirmCancel": "Bạn có chắc chắn muốn hủy đơn nghỉ phép này?",
+    "nameRequired": "Tên nhân viên không được để trống!",
+    "refresh": "Làm mới",
+    "errorRange": "Vui lòng chọn khoảng ngày nghỉ hợp lệ!",
+    "noType": "Chưa có loại nghỉ phép. Liên hệ nhân sự để cấu hình!",
+    "fields": {
+      "index": "STT",
+      "startDate": "Thời gian bắt đầu",
+      "endDate": "Thời gian kết thúc",
+      "type": "Loại nghỉ phép",
+      "reason": "Lý do",
+      "chooseDate": "Chọn ngày",
+      "reasonHolder": "Mô tả lý do xin nghỉ",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
       "action": "Hành động"
     }
   }

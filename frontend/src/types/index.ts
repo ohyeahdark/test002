@@ -35,11 +35,10 @@ export interface Employee {
   createdAt: string;
   updatedAt: string;
   
-  // Cập nhật quan trọng
   departmentId: string;
-  department: Department; // Prisma sẽ trả về object lồng nhau này
+  department: Department;
   positionId: string;
-  position: Position; // Prisma sẽ trả về object lồng nhau này
+  position: Position;
 }
 
 export interface User {
@@ -48,4 +47,14 @@ export interface User {
     password: string;
     role: string;
     employeeId: string;
+}
+
+export interface Leave {
+    id: string;
+    typeId: string;
+    startDate: string;
+    endDate: string;
+    reason?: string | null | undefined;
+    status: "PENDING" | "APPROVED" | "REJECTED" | "CANCELED";
+    createdAt: string;
 }

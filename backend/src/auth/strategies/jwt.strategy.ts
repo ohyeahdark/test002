@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 const accessCookieExtractor = (req: any) => {
   const v = req?.cookies?.access_token ? String(req.cookies.access_token) : null;
@@ -10,7 +11,7 @@ const accessCookieExtractor = (req: any) => {
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor() {
+  constructor(private readonly prisma: PrismaService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         accessCookieExtractor,
@@ -23,7 +24,14 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: any) {
-    console.log('[JwtStrategy.validate] payload:', payload?.sub, payload?.email);
-    return { userId: payload.sub, email: payload.email, type: 'access' };
+    console.log('[JwtStrategy.validate] payload:', payload);
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+      include: {employee: true}
+    });
+    console.log('[JwtStrategy.validate] user:', user);
+    if (!user) throw new UnauthorizedException('User not found');
+    // Trả về object này làm req.user
+    return user;
   }
 }

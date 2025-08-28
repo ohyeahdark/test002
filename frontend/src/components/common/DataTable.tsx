@@ -124,7 +124,7 @@ export function DataTable<T>({
                 <div className="p-4">
                     <input
                         type="text"
-                        placeholder={t('table.searchPlaceholder')}
+                        placeholder={t('common.searchPlaceholder')}
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                         className="w-full max-w border px-3 py-2 rounded text-sm dark:bg-white/[0.05] text-black dark:text-white"
@@ -160,13 +160,13 @@ export function DataTable<T>({
                         {loading ? (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="p-4 text-center">
-                                    {t('table.loading')}
+                                    {t('common.loading')}
                                 </TableCell>
                             </TableRow>
                         ) : displayedData.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="p-4 text-center text-gray-500">
-                                    {emptyMessage || t('table.noData')}
+                                    {emptyMessage || t('common.noData')}
                                 </TableCell>
                             </TableRow>
                         ) : (
@@ -194,17 +194,17 @@ export function DataTable<T>({
                         onClick={() => pagination.onPageChange(pagination.page - 1)}
                         disabled={pagination.page === 1}
                     >
-                        {t('table.prev')}
+                        {t('common.prev')}
                     </button>
                     <span>
-                        {t('table.page')} {pagination.page} / {totalPages}
+                        {t('common.page')} {pagination.page} / {totalPages}
                     </span>
                     <button
                         className="px-2 py-1 border rounded disabled:opacity-50"
                         onClick={() => pagination.onPageChange(pagination.page + 1)}
                         disabled={pagination.page === totalPages}
                     >
-                        {t('table.next')}
+                        {t('common.next')}
                     </button>
                 </div>
             )}

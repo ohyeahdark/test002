@@ -5,6 +5,7 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Employee from "./pages/Dashboard/Employee";
 import Department from "./pages/Dashboard/Department";
 import Position from "./pages/Dashboard/Position";
+import Leave from "./pages/Dashboard/Leave";
 import { useEffect } from "react";
 import { ThemeProvider } from './hooks/ThemeContext';
 import LoginPage from "./features/auth/LoginPage";
@@ -36,8 +37,11 @@ export default function App() {
         {/* Admin-only Routes */}
         <Route element={<ProtectedRoute requiredRole="admin" />}>
           <Route element={<AppLayout />}>
+            <Route path="/" element={<Department />} />
             <Route path="/department" element={<Department />} />
             <Route path="/position" element={<Position />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/leave" element={<Leave />} />
           </Route>
         </Route>
 
@@ -46,6 +50,7 @@ export default function App() {
           <Route element={<AppLayout />}>
             <Route path="/" element={<Employee />} />
             <Route path="/employee" element={<Employee />} />
+            <Route path="/leave" element={<Leave />} />
           </Route>
         </Route>
 

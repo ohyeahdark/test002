@@ -42,7 +42,7 @@ export default function LoginPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
           <button className="inline-flex items-center justify-center gap-2 py-2 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-4 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-white">
             <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
-              {/* Google icon path */}
+              <img src="/images/brand/brand-05.svg" alt="Google" />
               <path fill="#4285F4" d="..." />
               <path fill="#34A853" d="..." />
               <path fill="#FBBC05" d="..." />

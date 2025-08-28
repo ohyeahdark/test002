@@ -6,6 +6,7 @@ const navItems = [
   { path: '/', labelKey: 'nav.department', icon: '📁' },
   { path: '/position', labelKey: 'nav.position', icon: '📌' },
   { path: '/employee', labelKey: 'nav.employee', icon: '👤' },
+  { path: '/leave', labelKey: 'nav.leave', icon: '👤' },
 ];
 
 export default function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {

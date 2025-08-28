@@ -18,63 +18,156 @@ enum Role {
   USER
 }
 
-// Model mới cho Phòng ban
 model Department {
   id        String     @id @default(uuid())
   name      String     @unique
-  employees Employee[] // Một phòng ban có nhiều nhân viên
+  employees Employee[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
 
-// Model mới cho Chức vụ
 model Position {
   id        String     @id @default(uuid())
   name      String
-  employees Employee[] // Một chức vụ có nhiều nhân viên
+  employees Employee[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
 
-// Model Employee được cập nhật với các mối quan hệ
 model Employee {
-  id           String         @id @default(uuid())
-  name         String
-  email        String         @unique
-  phone        String?
-  avatarUrl    String?
-  bio          String?
-  
-  // Mối quan hệ với Position
-  position     Position @relation(fields: [positionId], references: [id])
-  positionId   String
+  id        String  @id @default(uuid())
+  name      String
+  email     String  @unique
+  phone     String?
+  avatarUrl String?
+  bio       String?
 
-  // Mối quan hệ với Department
+  position   Position @relation(fields: [positionId], references: [id])
+  positionId String
+
   department   Department @relation(fields: [departmentId], references: [id])
   departmentId String
- 
-  user         User?
-  
-  addressLine1 String?
-  addressCity  String?
+
+  user User?
+
+  addressLine1   String?
+  addressCity    String?
   addressCountry String?
 
-  status       EmployeeStatus @default(ACTIVE)
-  dateOfBirth  DateTime?
-  hireDate     DateTime       @default(now())
+  status      EmployeeStatus @default(ACTIVE)
+  dateOfBirth DateTime?
+  hireDate    DateTime       @default(now())
 
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leaveRequests LeaveRequest[]  @relation("LeaveEmployee")
+  approvals     LeaveApproval[] @relation("LeaveApprover")
+  notifications Notification[]
 }
 
 model User {
-  id           String   @id @default(uuid())
-  username     String   @unique
+  id           String    @id @default(uuid())
+  username     String    @unique
   password     String
-  role         String   @default("user")
-  refreshToken  String?  @db.Text
+  role         String    @default("user")
+  refreshToken String?   @db.Text
   employee     Employee? @relation(fields: [employeeId], references: [id])
   employeeId   String?   @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  leaveRequests LeaveRequest[] @relation("LeaveUser")
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELED
+}
+
+model LeaveType {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  isPaid    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  requests LeaveRequest[] @relation("LeaveRequestType")
+}
+
+model LeaveRequest {
+  id         String      @id @default(uuid())
+  employeeId String
+  employee   Employee    @relation("LeaveEmployee", fields: [employeeId], references: [id])
+  userId     String
+  user       User        @relation("LeaveUser", fields: [userId], references: [id])
+  typeId     String
+  type       LeaveType   @relation("LeaveRequestType", fields: [typeId], references: [id])
+  startDate  DateTime
+  endDate    DateTime
+  reason     String?
+  status     LeaveStatus @default(PENDING)
+  decidedAt  DateTime?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  currentApprovalOrder Int?
+  approvals            LeaveApproval[]
+
+  @@unique([id])
+  @@index([employeeId])
+  @@index([userId])
+  @@index([status])
+  @@index([startDate, endDate])
+}
+
+model LeaveApproval {
+  id             String       @id @default(uuid())
+  leaveRequestId String
+  leaveRequest   LeaveRequest @relation(fields: [leaveRequestId], references: [id])
+
+  order              Int
+  approverEmployeeId String
+  approver           Employee @relation("LeaveApprover", fields: [approverEmployeeId], references: [id])
+
+  status    ApprovalStatus @default(PENDING)
+  comment   String?
+  decidedAt DateTime?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@unique([leaveRequestId, order])
+  @@index([approverEmployeeId, status])
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SKIPPED
+}
+
+enum NotificationType {
+  LEAVE_REQUEST
+  LEAVE_STATUS
+}
+
+model Notification {
+  id                  String   @id @default(uuid())
+  recipientEmployeeId String
+  recipient           Employee @relation(fields: [recipientEmployeeId], references: [id])
+
+  type      NotificationType @default(LEAVE_REQUEST)
+  title     String
+  body      String?
+  link      String?
+  data      Json?
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@index([recipientEmployeeId, readAt])
 }

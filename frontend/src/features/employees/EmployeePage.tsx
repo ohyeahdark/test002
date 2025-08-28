@@ -12,6 +12,7 @@ import { DataTable } from '../../components/common/DataTable';
 import { getDepartments } from '../departments/departmentAPI';
 import { getPositions } from '../positions/positionAPI';
 import { useDebouncedEffect } from '../../hooks/useDebouncedEffect';
+import { Plus } from 'lucide-react';
 
 const EmployeePage = () => {
   const { t } = useTranslation();
@@ -105,9 +106,9 @@ const EmployeePage = () => {
             setSelectedEmployee(null);
             setIsModalOpen(true);
           }}
-          className="bg-primary text-black dark:text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
+            className="inline-flex items-center gap-2 rounded-md dark:bg-black bg-white px-3 py-2 text-sm dark:text-white text-black hover:opacity-90"
         >
-          + {t('common.add')}
+            <Plus className="h-4 w-4" /> {t('common.add')}
         </button>
       </div>
 
@@ -124,11 +125,10 @@ const EmployeePage = () => {
           { title: t('employee.fields.index'), className: 'text-center', render: (_, i) => (page - 1) * 10 + i + 1 },
           {
             title: t('employee.fields.avatar'),
-            className: 'text-center',
             key: 'avatarUrl',
             render: (e) => (
               <img
-                src={e.avatarUrl || '/default-avatar.png'}
+                src={e.avatarUrl || '/images/user/default-avatar.png'}
                 alt={e.name}
                 className="w-10 h-10 rounded-full object-cover"
               />

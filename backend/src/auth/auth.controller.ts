@@ -73,6 +73,7 @@ export class AuthController {
   @Get('me')
   getProfile(@Req() req: any) {
     console.log('[GET /auth/me] cookies:', req.cookies);
+    console.log('[GET /auth/me] user:', req.user);
     return req.user;
   }
 }
